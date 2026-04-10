@@ -72,19 +72,20 @@ public final class DeviceController {
             return;
         }
 
-        // FULL_WAKE_LOCK 已弃用，但在非 root、非 device owner 场景下仍是可用的简易方式。
-        // ACQUIRE_CAUSES_WAKEUP 确保立即点亮屏幕。
+        // 使用 SCREEN_BRIGHT_WAKE_LOCK + ACQUIRE_CAUSES_WAKEUP 唤醒并点亮屏幕。
+        // FULL_WAKE_LOCK 已弃用（API 17+），SCREEN_BRIGHT_WAKE_LOCK 同样弃用但更轻量，
+        // 在非 root、非 device owner 场景下仍是可用的简易方式。
         @SuppressWarnings("deprecation")
         PowerManager.WakeLock wakeLock = pm.newWakeLock(
-                PowerManager.FULL_WAKE_LOCK
+                PowerManager.SCREEN_BRIGHT_WAKE_LOCK
                         | PowerManager.ACQUIRE_CAUSES_WAKEUP
                         | PowerManager.ON_AFTER_RELEASE,
                 TAG + ":WakeUp"
         );
 
-        // 短暂持有 3 秒，足以让屏幕点亮
+        // 持有 3 秒后自动释放，确保屏幕点亮足够长以让 BridgeUnlockActivity 启动
         wakeLock.acquire(3000L);
-        Log.i(TAG, "屏幕唤醒 WakeLock 已获取（3 秒）");
+        Log.i(TAG, "屏幕唤醒 WakeLock 已获取（3 秒超时自动释放）");
     }
 
     /** 暴露 AppLaunchManager 以便 BridgeUnlockActivity 使用。 */

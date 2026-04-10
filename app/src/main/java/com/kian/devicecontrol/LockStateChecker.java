@@ -2,7 +2,6 @@ package com.kian.devicecontrol;
 
 import android.app.KeyguardManager;
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
