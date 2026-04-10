@@ -9,6 +9,8 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
+import com.kian.devicecontrol.databinding.ActivityBridgeUnlockBinding;
+
 /**
  * BridgeUnlockActivity — 桥接解锁 Activity。
  * <p>
@@ -28,11 +30,15 @@ public class BridgeUnlockActivity extends Activity {
     /** Intent extra：目标 App 包名 */
     public static final String EXTRA_TARGET_PACKAGE = "extra_target_package";
 
+    private ActivityBridgeUnlockBinding binding;
     private String targetPackage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        binding = ActivityBridgeUnlockBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // 确保可以在锁屏上方显示并点亮屏幕（兼容 API 27+ 的新方式）
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
@@ -103,5 +109,11 @@ public class BridgeUnlockActivity extends Activity {
 
         AppLaunchManager launcher = new AppLaunchManager(this);
         launcher.launchApp(targetPackage);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }
