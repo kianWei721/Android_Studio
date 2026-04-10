@@ -7,6 +7,19 @@
     <!-- 前台服务权限（API 28+） -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <!-- Android 11+（API 30+）包可见性声明 -->
+    <queries>
+        <!-- 微信 -->
+        <package android:name="com.tencent.mm" />
+        <!-- 系统设置 -->
+        <package android:name="com.android.settings" />
+        <!-- 允许查询所有具有 Launcher Activity 的应用，供 AppLaunchManager 通用启动 -->
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
