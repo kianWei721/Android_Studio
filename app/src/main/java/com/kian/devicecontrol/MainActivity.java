@@ -15,7 +15,7 @@ import com.kian.devicecontrol.databinding.ActivityMainBinding;
  * 1. 打开微信（com.tencent.mm）
  * 2. 打开系统设置（com.android.settings）
  * <p>
- * 按钮点击后通过 {@link DeviceController} 执行「唤醒 → 解锁 → 启动 App」完整流程。
+ * 按钮点击后通过 {@link UnlockOrchestrator} 执行「检查锁屏 → 唤醒 → 解锁 → 启动 App」完整流程。
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PACKAGE_SETTINGS = "com.android.settings";
 
     private ActivityMainBinding binding;
-    private DeviceController deviceController;
+    private UnlockOrchestrator unlockOrchestrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        deviceController = new DeviceController(this);
+        unlockOrchestrator = new UnlockOrchestrator(this);
 
         setupButtons();
 
@@ -51,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
         binding.btnLaunchWechat.setOnClickListener(v -> {
             Log.i(TAG, "用户点击：打开微信");
             Toast.makeText(this, "正在打开微信…", Toast.LENGTH_SHORT).show();
-            deviceController.wakeAndLaunch(PACKAGE_WECHAT);
+            unlockOrchestrator.unlockAndLaunch(PACKAGE_WECHAT);
         });
 
         // 按钮 2：打开系统设置
         binding.btnLaunchSettings.setOnClickListener(v -> {
             Log.i(TAG, "用户点击：打开系统设置");
             Toast.makeText(this, "正在打开系统设置…", Toast.LENGTH_SHORT).show();
-            deviceController.wakeAndLaunch(PACKAGE_SETTINGS);
+            unlockOrchestrator.unlockAndLaunch(PACKAGE_SETTINGS);
         });
     }
 
