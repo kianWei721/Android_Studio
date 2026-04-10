@@ -26,6 +26,9 @@ public final class DeviceWakeHelper {
 
     private final Context context;
 
+    /** 当前持有的 WakeLock，避免重复获取造成资源泄漏 */
+    private PowerManager.WakeLock currentWakeLock;
+
     public DeviceWakeHelper(@NonNull Context context) {
         this.context = context.getApplicationContext();
     }
@@ -59,6 +62,9 @@ public final class DeviceWakeHelper {
             return true;
         }
 
+        // 释放之前持有的 WakeLock，避免重复获取造成资源泄漏
+        releaseCurrentWakeLock();
+
         // SCREEN_BRIGHT_WAKE_LOCK 已标记弃用，但在非 Device Owner 场景下
         // 仍是最简单可行的唤醒方式。
         @SuppressWarnings("deprecation")
@@ -70,8 +76,20 @@ public final class DeviceWakeHelper {
         );
 
         wakeLock.acquire(durationMs);
+        currentWakeLock = wakeLock;
         Log.i(TAG, "屏幕唤醒 WakeLock 已获取（" + durationMs + " ms 超时自动释放）");
         return true;
+    }
+
+    /**
+     * 释放当前持有的 WakeLock（如果存在且仍处于持有状态）。
+     */
+    private void releaseCurrentWakeLock() {
+        if (currentWakeLock != null && currentWakeLock.isHeld()) {
+            currentWakeLock.release();
+            Log.d(TAG, "已释放之前的 WakeLock");
+        }
+        currentWakeLock = null;
     }
 
     /**

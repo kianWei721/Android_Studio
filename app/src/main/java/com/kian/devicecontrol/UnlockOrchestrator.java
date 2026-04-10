@@ -49,9 +49,9 @@ public final class UnlockOrchestrator {
      */
     public UnlockOrchestrator(@NonNull Context context) {
         this.context = context.getApplicationContext();
-        this.lockStateChecker = new LockStateChecker(context);
-        this.deviceWakeHelper = new DeviceWakeHelper(context);
-        this.appLaunchManager = new AppLaunchManager(context);
+        this.lockStateChecker = new LockStateChecker(this.context);
+        this.deviceWakeHelper = new DeviceWakeHelper(this.context);
+        this.appLaunchManager = new AppLaunchManager(this.context);
     }
 
     /**
