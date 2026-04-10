@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DeviceControlAgent</string>
+
+    <!-- MainActivity -->
+    <string name="main_title">设备控制中心</string>
+    <string name="main_subtitle">点击按钮模拟远程控制命令</string>
+    <string name="btn_launch_wechat">打开微信</string>
+    <string name="btn_launch_settings">打开系统设置</string>
+
+    <!-- BridgeUnlockActivity -->
+    <string name="bridge_unlock_hint">正在请求解锁…</string>
+
+    <!-- AccessibilityService -->
+    <string name="accessibility_service_description">DeviceControlAgent 无障碍服务，用于辅助设备控制。</string>
+</resources>

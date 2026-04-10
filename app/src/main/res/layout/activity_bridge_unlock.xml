@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- BridgeUnlockActivity 不需要自定义布局，
+     它通过 requestDismissKeyguard() 直接与系统锁屏交互，
+     此 layout 仅作占位，确保 Activity 有内容可显示。 -->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/bridge_unlock_hint"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+</FrameLayout>

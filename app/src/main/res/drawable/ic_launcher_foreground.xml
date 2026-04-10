@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 简单的圆形图标背景 -->
+    <path
+        android:fillColor="#FF1976D2"
+        android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0" />
+    <!-- D 字母标识 DeviceControl -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M40,35h8c8.84,0 16,7.16 16,16v6c0,8.84 -7.16,16 -16,16h-8V35zM48,67c5.52,0 10,-4.48 10,-10v-6c0,-5.52 -4.48,-10 -10,-10h-2v26h2z" />
+</vector>
